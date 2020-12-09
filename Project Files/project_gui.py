@@ -12,6 +12,7 @@ root=Tk()
 root.title("Wave Animation Generator")
 
 def changeshape0():
+	"""change shape of membrane to rectangle"""
 	global shape_1,l,w,r
 	l=Entry(root)
 	w=Entry(root)
@@ -22,6 +23,7 @@ def changeshape0():
 	shape_1=0
 
 def changeshape1():
+	"""change shape of rectangle to circle"""
 	global shape_1,l,w,r
 	l=Entry(root,state=DISABLED)
 	w=Entry(root,state=DISABLED)
@@ -32,6 +34,7 @@ def changeshape1():
 	shape_1=1
 
 def generate_fpreview():
+	"""create the function preview for the initial height distribution"""
 	a=f_r.get()
 	b=f_p.get()
 	if a:
@@ -55,6 +58,7 @@ def generate_fpreview():
 	Label(top,image=plotf).pack()
 
 def generate_gpreview():
+	"""create the function preview for the initial velocity distribution"""
 	c=g_r.get()
 	d=g_p.get()
 	if c:
@@ -78,7 +82,7 @@ def generate_gpreview():
 	Label(top,image=plotg).pack()
 
 def generateanimation():
-
+	"""create the animation using the given user-input parameters"""
 	space=Label(root,text="                                          "+
 				"                                             ")
 	space.grid(row=23,column=0)

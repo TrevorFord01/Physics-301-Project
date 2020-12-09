@@ -7,33 +7,42 @@ from numpy import *
 import scipy.special
 
 def animate_cir(f_state,g_state,r_0,prec,anilength):
+	"""generate the animation for a wave on a circular membrane using given parameters from GUI"""
 
 	def f(r,theta):
+		"""initial height distribution"""
 		x=r*np.cos(theta)
 		y=r*np.sin(theta)
 		return eval(f_state)
 
 	def fi0(r,theta):
+		"""modification to simplify the integration to compute Fourier-Bessel coefficients"""
 		return r*f(r,theta)*scipy.special.jv(0,zeros[0,m-1]*r/r_0)/(np.pi*r_0**2*scipy.special.jv(1,zeros[0,m-1])**2)
 
 	def ficos(r,theta):
+		"""modification to simplify the integration to compute Fourier-Bessel coefficients"""
 		return 2*r*f(r,theta)*scipy.special.jv(n,zeros[n,m-1]*r/r_0)*np.cos(n*theta)/(np.pi*r_0**2*scipy.special.jv(n+1,zeros[n,m-1])**2)
 
 	def fisin(r,theta):
+		"""modification to simplify the integration to compute Fourier-Bessel coefficients"""
 		return 2*r*f(r,theta)*scipy.special.jv(n,zeros[n,m-1]*r/r_0)*np.sin(n*theta)/(np.pi*r_0**2*scipy.special.jv(n+1,zeros[n,m-1])**2)
 
 	def g(r,theta):
+		"""initial velocity distribution"""
 		x=r*np.cos(theta)
 		y=r*np.sin(theta)
 		return eval(g_state)
 
 	def gi0(r,theta):
+		"""modification to simplify the integration to compute Fourier-Bessel coefficients"""
 		return r*g(r,theta)*scipy.special.jv(0,zeros[0,m-1]*r/r_0)/(np.pi*r_0*c*zeros[n,m-1]*scipy.special.jv(1,zeros[0,m-1])**2)
   
 	def gicos(r,theta):
+		"""modification to simplify the integration to compute Fourier-Bessel coefficients"""
 		return 2*r*g(r,theta)*scipy.special.jv(n,zeros[n,m-1]*r/r_0)*np.cos(n*theta)/(np.pi*r_0*c*zeros[n,m-1]*scipy.special.jv(n+1,zeros[n,m-1])**2)
 
 	def gisin(r,theta):
+		"""modification to simplify the integration to compute Fourier-Bessel coefficients"""
 		return 2*r*g(r,theta)*scipy.special.jv(n,zeros[n,m-1]*r/r_0)*np.sin(n*theta)/(np.pi*r_0*c*zeros[n,m-1]*scipy.special.jv(n+1,zeros[n,m-1])**2)
 
 	j=prec
@@ -120,6 +129,7 @@ def animate_cir(f_state,g_state,r_0,prec,anilength):
 	ax = fig.add_subplot(111, projection='3d')
 
 	def init():
+		"""initialize animation"""
 		ax.set_xlim(-1.1*r_0,1.1*r_0)
 		ax.set_ylim(-1.1*r_0,1.1*r_0)
 		ax.set_zlim(1.2*np.min(z),1.2*np.max(z))
@@ -128,6 +138,7 @@ def animate_cir(f_state,g_state,r_0,prec,anilength):
 		ax.set_zlabel("Height",fontsize=14)
 
 	def update_plot(frame,z,plot):
+		"""generate animation frames and update the frames"""
 		plot[0].remove()
 		plot[0]=ax.plot_surface(x,y,z[frame],cmap="viridis")
 
