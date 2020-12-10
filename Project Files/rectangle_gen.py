@@ -34,7 +34,7 @@ def animate_rect(f_state,g_state,L,H,prec,anilength):
 
 	def fi(x,y):
 		"""modification to simplify the integration to compute Fourier coefficients"""
-  		return f(x,y)*np.sin(n*np.pi*x/L)*np.sin(m*np.pi*y/H)*4/(L*H)
+		return f(x,y)*np.sin(n*np.pi*x/L)*np.sin(m*np.pi*y/H)*4/(L*H)
 
 	def g(x,y):
 		"""initial velocity distribution"""
@@ -62,7 +62,7 @@ def animate_rect(f_state,g_state,L,H,prec,anilength):
 
 	def gi(x,y):
 		"""modification to simplify the integration to compute Fourier coefficients"""
-  		return g(x,y)*np.sin(n*np.pi*x/L)*np.sin(m*np.pi*y/H)*4/(np.pi*c*np.sqrt(m**2*L**2+n**2*H**2))
+		return g(x,y)*np.sin(n*np.pi*x/L)*np.sin(m*np.pi*y/H)*4/(np.pi*c*np.sqrt(m**2*L**2+n**2*H**2))
 
 	j=prec
 	k=prec
@@ -110,17 +110,17 @@ def animate_rect(f_state,g_state,L,H,prec,anilength):
 
 	def init():
 		"""initialize animation"""
-  		ax.set_xlim(0,lim)
-  		ax.set_ylim(0,lim)
-  		ax.set_zlim(1.2*np.min(z),1.2*np.max(z))
-  		ax.set_xlabel("x",fontsize=18)
-  		ax.set_ylabel("y",fontsize=18)
-  		ax.set_zlabel("Height",fontsize=14)
+		ax.set_xlim(0,lim)
+		ax.set_ylim(0,lim)
+		ax.set_zlim(1.2*np.min(z),1.2*np.max(z))
+		ax.set_xlabel("x",fontsize=18)
+		ax.set_ylabel("y",fontsize=18)
+		ax.set_zlabel("Height",fontsize=14)
 
 	def update_plot(frame,z,plot):
 		"""generate animation frames and update the frames"""
-  		plot[0].remove()
-  		plot[0]=ax.plot_surface(X,Y,z[frame],cmap="viridis")
+		plot[0].remove()
+		plot[0]=ax.plot_surface(X,Y,z[frame],cmap="viridis")
 
 	plot=[ax.plot_surface(X,Y,z[0],cmap="viridis")]
 	ani1 = ani.FuncAnimation(fig, update_plot, frames=range(tot_frames),

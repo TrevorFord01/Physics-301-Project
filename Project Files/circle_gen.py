@@ -97,19 +97,19 @@ def animate_cir(f_state,g_state,r_0,prec,anilength):
 
 	R, Theta=np.meshgrid(r,theta)
 
-	bessels=np.array([[scipy.special.jv(n,zeros[n,m-1]*R/r_0) for m in range(1,j+1)] for n in range(k+1)])
+	bessels=np.array([[scipy.special.jv(n,zeros[n,m-1]*R/r_0) for n in range(k+1)] for m in range(1,j+1)])
 	sines=np.array([np.sin(n*Theta) for n in range(k+1)])
 	cosines=np.array([np.cos(n*Theta) for n in range(k+1)])
 
-	NTDA0=np.array([A_0coeff*bessels[0]])
-	NTDB0=np.array([B_0coeff*bessels[0]])
-	NTDA=A_coeff*bessels[1:]*cosines[1:]
-	NTDB=B_coeff*bessels[1:]*cosines[1:]
+	NTDA0=np.array([A_0coeff*bessels[:,0]])
+	NTDB0=np.array([B_0coeff*bessels[:,0]])
+	NTDA=A_coeff*bessels[:,1:]*cosines[1:]
+	NTDB=B_coeff*bessels[:,1:]*cosines[1:]
 	NTDA=np.append(NTDA0,NTDA,axis=0)
 	NTDB=np.append(NTDB0,NTDB,axis=0)
-	NTDC=C_coeff*bessels[1:]*sines[1:]
+	NTDC=C_coeff*bessels[:,1:]*sines[1:]
 	NTDC=np.append(np.zeros((1,j,250,250)),NTDC,axis=0)
-	NTDD=D_coeff*bessels[1:]*sines[1:]
+	NTDD=D_coeff*bessels[:,1:]*sines[1:]
 	NTDD=np.append(np.zeros((1,j,250,250)),NTDD,axis=0)
 
 	z=[]
